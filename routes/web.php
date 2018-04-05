@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/branch','BranchController@getAll');
+Route::get('/branch/{id}','BranchController@byId');
+Route::post('/branch','BranchController@save');
+Route::put('/branch/{id}','BranchController@update');
+Route::delete('/branch/{id}','BranchController@delete');
