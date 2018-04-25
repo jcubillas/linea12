@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Branches
 Route::get('/branch','BranchController@getAll');
 Route::get('/branch/{id}','BranchController@byId');
 Route::post('/branch','BranchController@save');

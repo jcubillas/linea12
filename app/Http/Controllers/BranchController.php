@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Branch;
 
 class BranchController extends Controller
@@ -11,7 +12,7 @@ class BranchController extends Controller
         return Branch::all();
     }
 
-    function byId(){
+    function byId($id){
         $branch = Branch::findOrFail($id);
         $branch ->stops;
         return $branch;
@@ -25,8 +26,9 @@ class BranchController extends Controller
         ])*/
         $branch = new Branch();
         $branch->name = $req->name;
+        $branch->schedule = $req->schedule;
         $branch->save();
-        return "ok";
+        return "Success (Save)";
     }
 
     function update($id, Request $req){
@@ -37,12 +39,13 @@ class BranchController extends Controller
         ])*/
         $branch = Branch::findOrFail($id);
         $branch->name = $req->name;
+        $branch->schedule = $req->schedule;
         $branch->save();
-        return "ok";
+        return "Success (Update)";
     }
 
     function delete($id){
         Branch::findOrFail($id)->delete();
-        return "ok";
+        return "Success (Delete)";
     }
 }
