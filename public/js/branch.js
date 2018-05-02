@@ -51,6 +51,18 @@ window.addEventListener("load",function(){
             )
     }
 
+    function updateBranch(id, editBranch){      
+        axios.put("/branch/" + id, editBranch)
+            .then((resp)=>{
+                updateTable();
+                $("#EditBranch").click();
+                data.editBranch = {}  
+            })                        
+            .catch((err)=>{
+                console.error(err.response.data.message); 
+            })   
+    }
+
     const app = new Vue({
         el: "#branchApp",
         data: data,
@@ -58,7 +70,8 @@ window.addEventListener("load",function(){
             deleteBranch: deleteBranch,
             createBranch: createBranch,
             refresh: refresh,
-            loadEditForm: loadEditForm
+            loadEditForm: loadEditForm,
+            updateBranch: updateBranch
         }
     })
 })
