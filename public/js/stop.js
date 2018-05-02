@@ -5,27 +5,30 @@ function stopApp(){
 
     const data = {
         branch : {},
+        stops: {},
+        newStop: {},
+        editStop: {},
         stopToCreate : {
-            name :"",
+            name : "",
             latitude : 0,
             longitude : 0
         }
     }
 
-    var map;
-    var bsas = {lat: -34.6037, lng: -58.3816};
+    let map;
+    let bsas = {lat: -34.6037, lng: -58.3816};
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: bsas
     })
 
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-    var directionsService = new google.maps.DirectionsService;
+    let directionsDisplay = new google.maps.DirectionsRenderer;
+    let directionsService = new google.maps.DirectionsService;
 
     directionsDisplay.setMap(map);
 
-    map.addListener("click", (e) => {
+    /*map.addListener("click", (e) => {
         const latLng = e.latLng
         data.stopToCreate.latitude = latLng.lat()
         data.stopToCreate.longitude = latLng.lng()
@@ -66,15 +69,69 @@ function stopApp(){
         })
 
         stopsPath.setMap(map);
+    }*/
+
+    function updateTable(){
+        refresh();
+        axios.get("/stop")
+        .then((resp=>data.stops = resp.data))
+        .catch((err)=>console.log(err.response.data))
+    }
+
+    function refresh(){
+        $("#name_stop").value = null;
+        $("#schedule_stop").value = null;
+        $("#name_editstop").value = null;
+        $("#schedule_editstop").value = null;
+        data.newBranch = {}; 
     }
 
     function updatePage(){
-        axios.get(`/branch/${branchId}`)
-            .then(resp => { 
-                data.branch = resp.data
-                updateMar-kers(data.branch.stops)
+        axios.get("/branch/" + branchId)
+        .then(resp => { 
+            console.log(resp.data)
+            data.branch = resp.data
+            //updateMarkers(data.branch.stops)
+        })
+        .catch(error => console.error(error.response.data))
+    }
+
+    function createStop(newStop){
+        newStop.branch_id = branchId;
+        axios.post("/stop", newStop)
+            .then((resp)=>{
+                console.log(resp.data);
+                updateTable();
+                $("#AddStop").click();
+                data.newStop = {};
             })
-            .catch(error => console.error(error.response ? error.response.data : error))
+            .catch((err)=>{
+                console.error(err.response.data); 
+            })
+    }
+
+    function updateStop(id, editStop){       
+        axios.put("/stop/" + id, editStop)
+            .then((resp)=>{
+                console.log(resp.data);
+                updatePage();
+                $("#EditStop").click();
+                data.editStop = {}
+            })                        
+            .catch((err)=>{
+                console.error(err.response.data); 
+            })       
+    }
+    
+    function deleteStop(id){       
+        axios.delete("/stop/" + id)
+            .then((resp)=>{
+                console.log(resp.data);
+                updatePage();
+            })                        
+            .catch((err)=>{
+                console.error(err.response.data); 
+            })       
     }
 
     function saveStop (stop){
@@ -92,16 +149,20 @@ function stopApp(){
     } 
 
     new Vue({
-        el: "#appStops",
+        el: "#stopApp",
         data : data,
         methods : {
-            saveStop: saveStop}
+            saveStop: saveStop,
+            updatePage: updatePage,
+            saveStop: saveStop,
+            createStop: createStop,
+            updateStop: updateStop,
+            deleteStop: deleteStop,
+            refresh: refresh,
+            updateTable: updateTable
+            //updateMarkers: updateMarkers
+        }
     })
 
-    updatePage()
+    updatePage();
 }  
-
-
-window.addEventListener("load", function(){
-    stopApp()
-})

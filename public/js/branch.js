@@ -12,6 +12,8 @@ window.addEventListener("load",function(){
     function refresh(){
         $("#name_branch").value = null;
         $("#schedule_branch").value = null;
+        $("#name_editbranch").value = null;
+        $("#schedule_editbranch").value = null;
         data.newBranch = {}; 
     }
 
@@ -35,7 +37,7 @@ window.addEventListener("load",function(){
             .then((resp)=> {
                 console.log(resp.data);
                 updateTable();
-                $("#close_modal").click();
+                $("#AddBranch").click();
                 data.newBranch = {};
             })
             .catch((err)=>console.log(err.response.data))

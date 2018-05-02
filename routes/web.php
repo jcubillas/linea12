@@ -21,3 +21,10 @@ Route::get('/branch/{id}','BranchController@byId');
 Route::post('/branch','BranchController@save');
 Route::put('/branch/{id}','BranchController@update');
 Route::delete('/branch/{id}','BranchController@delete');
+
+//Stops
+Route::get('/stop','StopController@getAll');
+Route::get('/stop/{id}','StopController@byId');
+Route::post('/stop','StopController@save');
+Route::put('/stop/{id}','StopController@update');
+Route::delete('/stop/{id}','StopController@delete');

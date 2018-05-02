@@ -14,7 +14,7 @@ class BranchController extends Controller
 
     function byId($id){
         $branch = Branch::findOrFail($id);
-        $branch ->stops;
+        $branch->stops;
         return $branch;
     }
 
