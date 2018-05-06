@@ -19,11 +19,11 @@ class BranchController extends Controller
     }
 
     function save(Request $req){
-        /*
-        Validacion desde el controller
+        /*Validacion desde el controller*/
         $req->validate([
-            'name' -> 'required|unique:branches|max:191'
-        ])*/
+            'name' => 'required|unique:branches|max:191',
+            'schedule' => 'required|max:191'
+        ]);
         $branch = new Branch();
         $branch->name = $req->name;
         $branch->schedule = $req->schedule;
@@ -32,11 +32,10 @@ class BranchController extends Controller
     }
 
     function update($id, Request $req){
-        /*
-        Validacion desde el controller
+        /*Validacion desde el controller*/
         $req->validate([
-            'name' -> 'required|unique:branches|max:191'
-        ])*/
+            'name' => 'required|unique:branches|max:191'
+        ]);
         $branch = Branch::findOrFail($id);
         $branch->name = $req->name;
         $branch->schedule = $req->schedule;

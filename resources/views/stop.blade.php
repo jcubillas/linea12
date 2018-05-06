@@ -1,24 +1,12 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Stops</title>
-        <script src="js/app.js"></script>
-        <script src="js/stop.js"></script>
-        <link rel="stylesheet" href="css/app.css">
-        <link rel="stylesheet" href="css/global.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">        
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-sm" style="background-color: #004676;">
-            <!-- Brand/logo -->
-            <a class="navbar-brand" href="#">
-                <img src="images/logo.png" alt="logo" style="width:40px;">
-            </a>
-            <div style="font-weight: bold; color: white">Linea 12</div>
-        </nav>
-        <div id="stopApp" class="container-fluid">   
+@extends('layouts.app')
+
+@section('content_javaScript')
+<script src="{{ asset('js/stops.js') }}" defer></script>
+@endsection
+
+
+@section('content')
+<div id="stopApp" class="container-fluid">   
             <h1 class="text text-center">Stops of the Branch: {{branch.name}}</h1>
             <button type='button' class="btn btn-primary" id="newStopButton" data-toggle="modal" data-target="#AddStop" v-on:click="refresh();">                        
                 <i class="fas fa-plus"></i>
@@ -35,10 +23,10 @@
                 </thead>
                 <tbody id="stopRows">
                     <tr v-for="stop of branch.stops">
-                    <td class="text text-center">{{stop.number}}</td>
-                    <td class="text text-center">{{stop.name}}</td>
-                    <td class="text text-center">{{stop.latitude}}</td>
-                    <td class="text text-center">{{stop.longitude}}</td>
+                    <td class="text text-center">@{{stop.number}}</td>
+                    <td class="text text-center">@{{stop.name}}</td>
+                    <td class="text text-center">@{{stop.latitude}}</td>
+                    <td class="text text-center">@{{stop.longitude}}</td>
                     <td class="text text-center">
                         <button type='button' title="Edit" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#EditStop" v-on:click="loadEditForm(stop.id);">
                             <i class="fas fa-pen-square"></i>                                               
@@ -108,5 +96,4 @@
             <div id="map"></div>
             <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwpxOB_1gTbUHGwkyQ6XdCRXZG6hX3t94&callback=stopApp"></script>
         </div>
-    </body>
-</html>
+@endsection

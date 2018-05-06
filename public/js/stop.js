@@ -1,52 +1,59 @@
 function stopApp(){
     
     const searchParams = new URLSearchParams(window.location.search.substring(1));
-    const branchId = searchParams.get("branch_id")
+    const branchId = searchParams.get("branch_id");
 
     const data = {
         branch : {},
         stops: {},
         newStop: {},
-        editStop: {},
-        stopToCreate : {
-            name : "",
-            latitude : 0,
-            longitude : 0
-        }
+        editStop: {}
     }
 
     let map;
-    let bsas = {lat: -34.6037, lng: -58.3816};
-
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: bsas
-    })
-
-    let directionsDisplay = new google.maps.DirectionsRenderer;
+    let directionsDisplay;
     let directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer;
 
-    directionsDisplay.setMap(map);
+    setTimeout(()=>{
 
-    /*map.addListener("click", (e) => {
-        const latLng = e.latLng
-        data.stopToCreate.latitude = latLng.lat()
-        data.stopToCreate.longitude = latLng.lng()
-    })
+        let bsas = {lat: -34.6037, lng: -58.3816};
+        mapOptions = {
+            zoom: 12,
+            center: bsas
+        }
+
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        
+        map.addListener("click", (e) => {
+            placeMarker(event.latLng);
+        });
+
+        directionsDisplay.setMap(map);
+
+    } , 100)
+
+    function placeMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location, 
+            map: map
+        });
+     }
 
     function updateMarkers (stops){
 
-        const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, id : s.id}))
+        const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, number: s.number, name: s.name, branch_id: s.branch_id, id : s.id}))
 
-        points.forEach( p => {    
+        points.forEach( p => {
             const marker = new google.maps.Marker({
                 position: p,
                 map: map,
                 draggable: true,
-                label: "" + p.id
+                label: "" + p.number
             })
             marker.addListener("dragend",()=> {
-                axios.put(`/stop/${p.id}`,{latitude:marker.position.lat() , longitude: marker.position.lng()})
+                axios.put("/stop/" + p.id, {latitude:marker.position.lat() , longitude: marker.position.lng(), number: p.number, name: p.name, branch_id: p.branch_id, })
                     .then( r => updatePage() )
                     .catch(error => console.error(error.response ? error.response.data : error))
             })
@@ -67,9 +74,7 @@ function stopApp(){
                 console.error(response);
             }
         })
-
-        stopsPath.setMap(map);
-    }*/
+    }
 
     function updateTable(){
         refresh();
@@ -89,9 +94,8 @@ function stopApp(){
     function updatePage(){
         axios.get("/branch/" + branchId)
         .then(resp => { 
-            console.log(resp.data)
             data.branch = resp.data
-            //updateMarkers(data.branch.stops)
+            updateMarkers(data.branch.stops.sort(function(a,b) {return (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0);}))
         })
         .catch(error => console.error(error.response.data))
     }
@@ -100,8 +104,7 @@ function stopApp(){
         newStop.branch_id = branchId;
         axios.post("/stop", newStop)
             .then((resp)=>{
-                console.log(resp.data);
-                updateTable();
+                updatePage();
                 $("#AddStop").click();
                 data.newStop = {};
             })
@@ -110,10 +113,19 @@ function stopApp(){
             })
     }
 
+    function loadEditForm(stop_id){
+        axios.get("/stop/" + stop_id)
+            .then((resp)=>{
+                data.editStop = resp.data;
+            })                        
+            .catch((err)=>
+                console.error(err.response.data)
+            )
+    }
+
     function updateStop(id, editStop){       
         axios.put("/stop/" + id, editStop)
             .then((resp)=>{
-                console.log(resp.data);
                 updatePage();
                 $("#EditStop").click();
                 data.editStop = {}
@@ -126,7 +138,6 @@ function stopApp(){
     function deleteStop(id){       
         axios.delete("/stop/" + id)
             .then((resp)=>{
-                console.log(resp.data);
                 updatePage();
             })                        
             .catch((err)=>{
@@ -159,8 +170,9 @@ function stopApp(){
             updateStop: updateStop,
             deleteStop: deleteStop,
             refresh: refresh,
-            updateTable: updateTable
-            //updateMarkers: updateMarkers
+            updateTable: updateTable,
+            loadEditForm: loadEditForm,
+            updateMarkers: updateMarkers
         }
     })
 
