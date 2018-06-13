@@ -19,13 +19,13 @@ window.addEventListener("load",function(){
 
     function updateTable(){
         refresh();
-        axios.get("/branch")
+        axios.get("api/branch")
         .then((resp=>data.branches = resp.data))
         .catch((err)=>console.log(err.response.data))
     }
 
     function deleteBranch(branch){
-        axios.delete("/branch/" + branch.id)
+        axios.delete("api/branch/" + branch.id)
         .then((resp)=>updateTable()
         )
         .catch((err)=>console.log(err.response.data)    
@@ -33,7 +33,7 @@ window.addEventListener("load",function(){
     }
     
     function createBranch(branch){
-        axios.post("/branch", branch)
+        axios.post("api/branch", branch)
             .then((resp)=> {
                 console.log(resp.data);
                 updateTable();
@@ -44,7 +44,7 @@ window.addEventListener("load",function(){
     }
 
     function loadEditForm(branch_id){
-        axios.get("/branch/" + branch_id)
+        axios.get("api/branch/" + branch_id)
             .then((resp)=>{
                 data.editBranch = resp.data;
             })                        
@@ -54,7 +54,7 @@ window.addEventListener("load",function(){
     }
 
     function updateBranch(id, editBranch){      
-        axios.put("/branch/" + id, editBranch)
+        axios.put("api/branch/" + id, editBranch)
             .then((resp)=>{
                 updateTable();
                 $("#EditBranch").click();

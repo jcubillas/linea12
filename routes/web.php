@@ -12,34 +12,34 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 Route::get('/home', function () {
     return view('index');
 });
 
-Route::get('/branchsection', function () {
+Route::get('/branch', function () {
     return view('branch');
 })->middleware('auth');
 
-Route::get('/stopsection', function () {
+Route::get('/stop', function () {
     return view('stop');
 })->middleware('auth');
 
 //Branches
-Route::get('/branch','BranchController@getAll')->middleware('auth');
-Route::get('/branch/{id}','BranchController@byId')->middleware('auth');
-Route::post('/branch','BranchController@save')->middleware('auth');
-Route::put('/branch/{id}','BranchController@update')->middleware('auth');
-Route::delete('/branch/{id}','BranchController@delete')->middleware('auth');
+Route::get('api/branch','BranchController@getAll')->middleware('auth');
+Route::get('api/branch/{id}','BranchController@byId')->middleware('auth');
+Route::post('api/branch','BranchController@save')->middleware('auth');
+Route::put('api/branch/{id}','BranchController@update')->middleware('auth');
+Route::delete('api/branch/{id}','BranchController@delete')->middleware('auth');
 
 //Stops
-Route::get('/stop','StopController@getAll')->middleware('auth');
-Route::get('/stop/{id}','StopController@byId')->middleware('auth');
-Route::post('/stop','StopController@save')->middleware('auth');
-Route::put('/stop/{id}','StopController@update')->middleware('auth');
-Route::delete('/stop/{id}','StopController@delete')->middleware('auth');
+Route::get('api/stop','StopController@getAll')->middleware('auth');
+Route::get('api/stop/{id}','StopController@byId')->middleware('auth');
+Route::post('api/stop','StopController@save')->middleware('auth');
+Route::put('api/stop/{id}','StopController@update')->middleware('auth');
+Route::delete('api/stop/{id}','StopController@delete')->middleware('auth');
 Auth::routes();
 
 //Index

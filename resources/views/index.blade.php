@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
+@section('content_javascript')
 <script src="{{ asset('js/index.js') }}" defer></script>
+@endsection
 
 @section('content')
 
@@ -19,7 +21,6 @@
                 <label for="branchsList">
                     <h3 class="text text-center">Listado de Ramales</h3>
                 </label>
-                
                 <div  v-for="branch of branches" class="form-check">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input checkedBranches" v-bind:value="branch.id" v-on:change="updateMap();" checked>@{{ branch.name }}

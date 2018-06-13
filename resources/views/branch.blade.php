@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content_javaScript')
+@section('content_javascript')
 <script src="{{ asset('js/branch.js') }}" defer></script>
 @endsection
 
@@ -20,8 +20,8 @@
             </thead>
             <tbody id="branchRows">
                 <tr v-for="branch of branches">
-                <td class="text text-center">@{{branch.name}} </td>
-                <td class="text text-center">@{{branch.schedule}} </td>
+                <td class="text text-center">@{{ branch.name }} </td>
+                <td class="text text-center">@{{ branch.schedule }} </td>
                 <td class="text text-center">
                     <button type='button' title="Edit" class="btn btn-primary" style="margin:2px" data-toggle="modal" data-target="#EditBranch" v-on:click="loadEditForm(branch.id);">
                         <i class="fas fa-pen-square"></i>                                               
