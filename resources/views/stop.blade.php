@@ -1,20 +1,23 @@
 @extends('layouts.app')
 
-@section('content_javaScript')
-<script src="{{ asset('js/stops.js') }}" defer></script>
+@section('content_javascript')
+<script src="{{ asset('js/stop.js') }}" defer></script>
 @endsection
 
 
 @section('content')
 <div id="stopApp" class="container-fluid">   
-            <h1 class="text text-center">Stops of the Branch: {{branch.name}}</h1>
+            <h1 class="text text-center">Stops of the Branch: @{{branch.name}}</h1>
             <button type='button' class="btn btn-primary" id="newStopButton" data-toggle="modal" data-target="#AddStop" v-on:click="refresh();">                        
                 <i class="fas fa-plus"></i>
+            </button>
+            <button type='button' class="btn btn-primary" id="backToBranches" v-bind:href="/branch.html">                        
+                <i class="fas fa-arrow-left"></i>
             </button>
             <table class="table table-striped table-dark">
                 <thead>
                     <tr>
-                    <th class="text text-center">Number</th>
+                    <th class="text text-center">Numbers</th>
                     <th class="text text-center">Name</th>
                     <th class="text text-center">Latitude</th>
                     <th class="text text-center">Longitude</th>
@@ -92,8 +95,8 @@
                     </div>
                 </div>          
             </div> 
-            <!-- Google Maps -->
+            <!-- Google Maps 
             <div id="map"></div>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwpxOB_1gTbUHGwkyQ6XdCRXZG6hX3t94&callback=stopApp"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwpxOB_1gTbUHGwkyQ6XdCRXZG6hX3t94&callback=stopApp"></script>-->
         </div>
 @endsection

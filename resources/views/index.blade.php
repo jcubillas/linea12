@@ -32,7 +32,7 @@
         <div class="col-md-8">
             Google Maps 
             <div id="map_inRoutes"></div>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwpxOB_1gTbUHGwkyQ6XdCRXZG6hX3t94&callback=indexApp"></script>
+            <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwpxOB_1gTbUHGwkyQ6XdCRXZG6hX3t94&callback=indexApp"></script>-->
         </div>
     </div>  
 </div>

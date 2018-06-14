@@ -1,8 +1,6 @@
-function stopApp(){
-    
-    const searchParams = new URLSearchParams(window.location.search.substring(1));
-    const branchId = searchParams.get("branch_id");
+"use strict"
 
+window.addEventListener("load",function(){
     const data = {
         branch : {},
         stops: {},
@@ -10,10 +8,18 @@ function stopApp(){
         editStop: {}
     }
 
-    let map;
+    const searchParams = new URLSearchParams(window.location.search.substring(1));
+    const branchId = searchParams.get("branch_id");
+    console.log(branchId);
+
+    updatePage();
+
+    /*let map;
     let directionsDisplay;
     let directionsService = new google.maps.DirectionsService;
-    directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay = new google.maps.DirectionsRenderer({ 
+        polylineOptions: {strokeColor:"#4a4a4a",strokeWeight:5}, 
+        suppressMarkers:true });
 
     setTimeout(()=>{
 
@@ -37,9 +43,10 @@ function stopApp(){
     function placeMarker(location) {
         var marker = new google.maps.Marker({
             position: location, 
-            map: map
+            map: map,
+            suppressMarkers: true
         });
-     }
+    }
 
     function updateMarkers (stops){
 
@@ -53,7 +60,7 @@ function stopApp(){
                 label: "" + p.number
             })
             marker.addListener("dragend",()=> {
-                axios.put("/stop/" + p.id, {latitude:marker.position.lat() , longitude: marker.position.lng(), number: p.number, name: p.name, branch_id: p.branch_id, })
+                axios.put("api/stop/" + p.id, {latitude:marker.position.lat() , longitude: marker.position.lng(), number: p.number, name: p.name, branch_id: p.branch_id, })
                     .then( r => updatePage() )
                     .catch(error => console.error(error.response ? error.response.data : error))
             })
@@ -74,11 +81,11 @@ function stopApp(){
                 console.error(response);
             }
         })
-    }
+    }*/
 
     function updateTable(){
         refresh();
-        axios.get("/stop")
+        axios.get("api/stop")
         .then((resp=>data.stops = resp.data))
         .catch((err)=>console.log(err.response.data))
     }
@@ -92,17 +99,17 @@ function stopApp(){
     }
 
     function updatePage(){
-        axios.get("/branch/" + branchId)
+        axios.get("api/branch/" + branchId)
         .then(resp => { 
             data.branch = resp.data
-            updateMarkers(data.branch.stops.sort(function(a,b) {return (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0);}))
+            //updateMarkers(data.branch.stops.sort(function(a,b) {return (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0);}))
         })
         .catch(error => console.error(error.response.data))
     }
 
     function createStop(newStop){
         newStop.branch_id = branchId;
-        axios.post("/stop", newStop)
+        axios.post("api/stop", newStop)
             .then((resp)=>{
                 updatePage();
                 $("#AddStop").click();
@@ -114,7 +121,7 @@ function stopApp(){
     }
 
     function loadEditForm(stop_id){
-        axios.get("/stop/" + stop_id)
+        axios.get("api/stop/" + stop_id)
             .then((resp)=>{
                 data.editStop = resp.data;
             })                        
@@ -124,7 +131,7 @@ function stopApp(){
     }
 
     function updateStop(id, editStop){       
-        axios.put("/stop/" + id, editStop)
+        axios.put("api/stop/" + id, editStop)
             .then((resp)=>{
                 updatePage();
                 $("#EditStop").click();
@@ -136,7 +143,7 @@ function stopApp(){
     }
     
     function deleteStop(id){       
-        axios.delete("/stop/" + id)
+        axios.delete("api/stop/" + id)
             .then((resp)=>{
                 updatePage();
             })                        
@@ -147,7 +154,7 @@ function stopApp(){
 
     function saveStop (stop){
         stop.branchId = branchId
-        axios.post("/stop",stop)
+        axios.post("api/stop",stop)
             .then(resp => { 
                 data.stopToCreate =  {
                     name :"",
@@ -171,10 +178,10 @@ function stopApp(){
             deleteStop: deleteStop,
             refresh: refresh,
             updateTable: updateTable,
-            loadEditForm: loadEditForm,
-            updateMarkers: updateMarkers
+            loadEditForm: loadEditForm/*,
+            updateMarkers: updateMarkers*/
         }
     })
 
-    updatePage();
-}  
+    
+}) 

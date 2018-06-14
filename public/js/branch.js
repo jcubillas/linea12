@@ -61,7 +61,7 @@ window.addEventListener("load",function(){
                 data.editBranch = {}  
             })                        
             .catch((err)=>{
-                console.error(err.response.data.message); 
+                console.error(err.response); 
             })   
     }
 

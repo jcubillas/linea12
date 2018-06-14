@@ -29,7 +29,7 @@
                     <button type='button' title="Delete" class="btn btn-danger" data-toggle="modal" v-on:click="deleteBranch(branch);">
                         <i class="fas fa-trash"></i>                
                     </button>
-                    <a class="btn btn-success"  title="Stops" style="margin:2px" v-bind:href="'/stop.html?branch_id=' + branch.id" >
+                    <a class="btn btn-success"  title="Stops" style="margin:2px" v-bind:href="'/stop?branch_id=' + branch.id" >
                         <i class="fas fa-bus"></i>     
                     </a>
                 </td>

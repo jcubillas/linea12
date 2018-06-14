@@ -27,7 +27,7 @@
 <body>
     <div>
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #004676;">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/home.html">
                 <img src="images/logo.png" alt="logo" style="width:40px;">
             </a>
             <div style="font-weight: bold; color: white">Linea 12</div>
@@ -54,6 +54,7 @@
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+                                <a class="dropdown-item" href="/branch.html">Branches</a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
