@@ -1,6 +1,6 @@
 "use strict"
 
-window.addEventListener("load",function(){
+function stopApp() {
     const data = {
         branch : {},
         stops: {},
@@ -10,11 +10,8 @@ window.addEventListener("load",function(){
 
     const searchParams = new URLSearchParams(window.location.search.substring(1));
     const branchId = searchParams.get("branch_id");
-    console.log(branchId);
 
-    updatePage();
-
-    /*let map;
+    let map;
     let directionsDisplay;
     let directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer({ 
@@ -22,16 +19,13 @@ window.addEventListener("load",function(){
         suppressMarkers:true });
 
     setTimeout(()=>{
-
         let bsas = {lat: -34.6037, lng: -58.3816};
-        mapOptions = {
+        let mapOptions = {
             zoom: 12,
             center: bsas
         }
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-        
         map.addListener("click", (e) => {
             placeMarker(event.latLng);
         });
@@ -81,9 +75,10 @@ window.addEventListener("load",function(){
                 console.error(response);
             }
         })
-    }*/
+    }
 
     function updateTable(){
+        console.log("before refresh");
         refresh();
         axios.get("api/stop")
         .then((resp=>data.stops = resp.data))
@@ -99,10 +94,13 @@ window.addEventListener("load",function(){
     }
 
     function updatePage(){
+        console.log("update page");
         axios.get("api/branch/" + branchId)
         .then(resp => { 
             data.branch = resp.data
-            //updateMarkers(data.branch.stops.sort(function(a,b) {return (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0);}))
+            console.log("data branch");
+            console.log(data.branch);
+            updateMarkers(data.branch.stops.sort(function(a,b) {return (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0);}))
         })
         .catch(error => console.error(error.response.data))
     }
@@ -164,7 +162,9 @@ window.addEventListener("load",function(){
                 updatePage()
             })
             .catch(error => console.error(error.response.data))
-    } 
+    }
+
+    updatePage();
 
     new Vue({
         el: "#stopApp",
@@ -172,16 +172,16 @@ window.addEventListener("load",function(){
         methods : {
             saveStop: saveStop,
             updatePage: updatePage,
-            saveStop: saveStop,
             createStop: createStop,
             updateStop: updateStop,
             deleteStop: deleteStop,
             refresh: refresh,
             updateTable: updateTable,
-            loadEditForm: loadEditForm/*,
-            updateMarkers: updateMarkers*/
+            loadEditForm: loadEditForm,
+            updateMarkers: updateMarkers
         }
     })
-
-    
+}
+window.addEventListener("load",function(){
+    stopApp();
 }) 

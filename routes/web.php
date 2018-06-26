@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('index');
+    return view('home');
 });
 
 Route::get('/branch', function () {
@@ -42,7 +42,7 @@ Route::put('api/stop/{id}','StopController@update')->middleware('auth');
 Route::delete('api/stop/{id}','StopController@delete')->middleware('auth');
 Auth::routes();
 
-//Index
+//Home
 Route::get('/routes','BranchController@getAll');
 Route::get('/routes/{id}','BranchController@byId');
 
