@@ -57,7 +57,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('Sarmiento 2399 (Sarmiento y Azcuénaga)', 6, '-34.60612945', '-58.40058575', 2),
 ('Sarmiento 2601 (Sarmiento y Paso)', 7, '-34.60637995', '-58.40360765', 2),
 ('Sarmiento 2801 (Sarmiento y AV Pueyrredón)', 8, '-34.60654053', '-58.40605637', 2),
-('Sarmiento 3000 (Sarmiento y Ecuador)', 9, '-34.6066645', '--58.40886211', 2),
+('Sarmiento 3000 (Sarmiento y Ecuador)', 9, '-34.6066645', '-58.40886211', 2),
 ('Sarmiento 3200 (Sarmiento y Dr. Tomás Manuel de Anchorena)', 10, '-34.60650737', '-58.41154625', 2),
 ('Sarmiento 3401 (Sarmiento y Gallo)', 11, '-34.6060825', '-58.41376748', 2),
 ('Sarmiento 3601 (Sarmiento y Billinghurst)', 12, '-34.60564667', '-58.41610661', 2),
@@ -70,7 +70,6 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 
 --Branch Nº 3 - Plaza Miserere
 INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
-
 ('AV Del Libertador 1425 (AV Del Libertador y Montevideo)', 1, '-34.5875556', '-58.38418345', 3),
 ('Rodriguez Peña 2000 (Rodriguez Peña y Posadas)', 2, '-34.58850974', '-58.38640094', 3),
 ('Rodriguez Peña 1801 (Rodriguez Peña y AV Pte. Manuel Quintana)', 3, '-34.58967563', '-58.38769913', 3),
@@ -89,3 +88,42 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('AV Pueyrredón 401 (AV Pueyrredón y Valentín Gómez)', 16, '-34.60550608', '-58.40567084', 3),
 ('AV Pueyrredón 201 (AV Pueyrredón y Pte. Tte. Gral. Juan Domingo Perón)', 17, '-34.60765519', '-58.40608671', 3),
 ('AV Rivadavia 2802 (AV Rivadavia y AV Pueyrredón)', 18, '-34.61010752', '-58.40605082', 3)
+
+--Branch Nº 4 - Parque Rivadavia
+INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
+('Rosario 300 (Rosario y Viel)', 1, '-34.618895290094734', '-58.43306291408612', 4),
+('Rosario 85 (Rosario y Senillosa)', 2, '-34.618442310744356', '-58.42943077776107', 4),
+('AV La Plata 180 (AV La Plata y Chaco)', 3, '-34.61695190797384', '-58.42878283282732', 4),
+('Hipólito Yrigoyen 4302 (Hipólito Yirigoyen y Muñiz)', 4, '-34.615013954961846', '-58.42759237440623', 4),
+('Yatay 119 (Yatay y Lezica)', 5, '-34.613105835374505', '-58.428344067135356', 4),
+('Yatay 299 (Yatay y AV Díaz Vélez)', 6, '-34.608893355523755', '-58.429146040146975', 4),
+('AV Díaz Vélez 4199 (AV Díaz Vélez y Rawson)', 7, '-34.60870114530558', '-58.426125595778444', 4),
+('AV Díaz Vélez 3999 (AV Díaz Vélez y Francisco Acuña de Figueoa)', 8, '-34.608637732229', '-58.42287941620077', 4),
+('AV Díaz Vélez 3802 (AV Díaz Vélez y Jerónimo Salguero)', 9, '-34.608583118356336', '-58.420234606403426', 4),
+('Jerónimo Salguero 352 (Jerónimo Salguero e Inca)', 10, '-34.60673574186824', '-58.41987733660022', 4),
+('Jerónimo Salguero  551 (Jerónimo Salguero y Valentín Gómez)', 11, '-34.604253118586726', '-58.41956069528669', 4),
+('AV Corrientes 3900 (AV Corrientes 3900 y Jerónimo Salguero)', 12, '-34.60336240754803', '-58.41929662528412', 4),
+('AV Corrientes 3702 (AV Corrientes y Mario Bravo)', 13, '-34.603617592301156', '-58.416936825121866', 4),
+('AV Corrientes 3502 (AV Corrientes y Sanchez de Bustamante)', 14, '-34.60400173601828', '-58.41472066276083', 4),
+('AV Corrientes 3301 (AV Corrientes y Agüero)', 15, '-34.60407018836955', '-58.41188606627941', 4),
+('AV Corrientes 3115 (AV Corrientes y Jean Jaures)', 16, '-34.60409781640737', '-58.40933007214272', 4),
+('AV Corrientes 2902 (AV Corrientes y Boulogne Sur Mer)', 17, '-34.60471487533306', '-58.4068280576073', 4),
+('AV Pueyrredón 401 (AV Pueyrredón y Valentín Gomez )', 18, '-34.605485739417894', '-58.40563890637037', 4)
+
+--Branch Nº 5 - Plaza Serrano
+INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
+('AV Córdoba 2200 (AV Córdoba y Pasteur)', 1, '-34.59970510493597', '-58.398990072642334', 5),
+('AV Córdoba 2499 (AV Córdoba y Larrea)', 2, '-34.599150854815186', '-58.402347992743785', 5),
+('AV Córdoba 2650 (AV Córdoba y Boulogne Sur Mer)', 3, '-34.598055426141734', '-58.40452366473744', 5),
+('AV Córdoba 2799 (AV Córdoba y Jean Jaures)', 4, '-34.59802893163175', '-58.40645485522816', 5),
+('AV Córdoba 3000 (AV Córdoba y Laprida)', 5, '-34.598107705462574', '-58.40942210849539',5),
+('AV Córdoba 3199 (AV Córdoba y Gallo)', 6, '-34.59796695222851', '-58.41178834338075', 5),
+('AV Córdoba 3399 (AV Córdoba y Billinghurst)', 7, '-34.59786159305678', '-58.414494692276776', 5),
+('AV Córdoba 3599 (AV Córdoba y Bulnes)', 8, '-34.59783068272218', '-58.417140260822634', 5),
+('AV Córdoba 3799 (AV Córdoba y AV Medrano)', 9, '-34.59773287233563', '-58.42002927500516', 5),
+('Gascón 1100 (Gascón y AV Córdoba)', 10, '-34.597424794209864', '-58.42330482312889', 5),
+('Gascón 1300 (Gascón y Gorriti)', 11, '-34.59505517558795', '-58.42297137320634', 5),
+('Honduras 4301 (Honduras y Lavalleja)', 12, '-34.59337805204354', '-58.423625261643565', 5),
+('Honduras 4501 (Honduras y Aráoz)', 13, '-34.592034053650664', '-58.4252344609821', 5),
+('Honduras 4701 (Honduras y Malabia)', 14, '-34.59068714106355', '-58.42710127845646', 5),
+('Honduras 4900 (Honduras y Gurruchaga)', 15, '-34.58940382345916', '-58.42911291025632', 5)

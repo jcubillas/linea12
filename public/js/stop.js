@@ -10,7 +10,7 @@ function stopApp() {
 
     const searchParams = new URLSearchParams(window.location.search.substring(1));
     const branchId = searchParams.get("branch_id");
-
+    const googleKey = "AIzaSyDwpxOB_1gTbUHGwkyQ6XdCRXZG6hX3t94";
     let map;
     let directionsDisplay;
     let directionsService = new google.maps.DirectionsService;
@@ -50,7 +50,7 @@ function stopApp() {
             const marker = new google.maps.Marker({
                 position: p,
                 map: map,
-                draggable: true,
+                draggable: false,
                 label: "" + p.number
             })
             marker.addListener("dragend",()=> {
@@ -98,8 +98,6 @@ function stopApp() {
         axios.get("api/branch/" + branchId)
         .then(resp => { 
             data.branch = resp.data
-            console.log("data branch");
-            console.log(data.branch);
             updateMarkers(data.branch.stops.sort(function(a,b) {return (a.number > b.number) ? 1 : ((b.number > a.number) ? -1 : 0);}))
         })
         .catch(error => console.error(error.response.data))
@@ -107,14 +105,21 @@ function stopApp() {
 
     function createStop(newStop){
         newStop.branch_id = branchId;
-        axios.post("api/stop", newStop)
-            .then((resp)=>{
-                updatePage();
-                $("#AddStop").click();
-                data.newStop = {};
-            })
-            .catch((err)=>{
-                console.error(err.response.data); 
+        fetch("https://maps.googleapis.com/maps/api/geocode/json?key=" + googleKey + "&address=" + this.newStop.address)
+            .then( r => r.json() )
+            .then(msg => {
+                this.newStop.latitude = msg.results[0].geometry.location.lat;
+                this.newStop.longitude = msg.results[0].geometry.location.lng;
+                console.log("Lat: " + this.newStop.latitude + " Lng: " + this.newStop.longitude);
+                axios.post("api/stop", newStop)
+                .then((resp)=>{
+                    updatePage();
+                    $("#AddStop").click();
+                    data.newStop = {};
+                })
+                .catch((err)=>{
+                    console.error(err.response.data); 
+                })
             })
     }
 
@@ -128,8 +133,18 @@ function stopApp() {
             )
     }
 
-    function updateStop(id, editStop){       
-        axios.put("api/stop/" + id, editStop)
+    function updateStop(id, editStop){
+        console.log("EditStop");
+        console.log(editStop);
+        fetch("https://maps.googleapis.com/maps/api/geocode/json?key=" + googleKey + "&address=" + this.editStop.address)
+        .then( r => r.json() )
+        .then(msg => {
+            this.editStop.latitude = msg.results[0].geometry.location.lat;
+            this.editStop.longitude = msg.results[0].geometry.location.lng;
+            console.log("EditStop - after");
+            console.log(editStop);
+
+            axios.put("api/stop/" + id, this.editStop)
             .then((resp)=>{
                 updatePage();
                 $("#EditStop").click();
@@ -137,7 +152,8 @@ function stopApp() {
             })                        
             .catch((err)=>{
                 console.error(err.response.data); 
-            })       
+            }) 
+        })  
     }
     
     function deleteStop(id){       

@@ -30,10 +30,7 @@ function homeApp(){
             routesDisplays[branch.id] = new google.maps.DirectionsRenderer();
             axios.get("routes/" + branch.id)
                 .then(resp => {
-                    console.log("branch")
-                    console.log(resp.data)
                     branch = resp.data
-                    
                     const points = branch.stops.map( s => ({lat:s.latitude,lng:s.longitude, id : s.number}))
                     const waypoints =  points.slice(1, -1).map( p => ({ location : p , stopover : false}))
 
@@ -46,6 +43,10 @@ function homeApp(){
                     };
                     
                     let color = colorById(branch.id)
+                    branch.color = color;
+
+                   /* document.getElementById(branch.id).style.background = color;
+                    console.log(branch);*/
 
                     directionsService.route(request, function(result, status) {
                         if (status == 'OK') {
@@ -71,25 +72,12 @@ function homeApp(){
 
     //Google Maps Api End //
     function colorById(id){
-        return "hsl(" + (id * 205) % 360 + " , 100%,50%)";
-    }
-
-    function updateMap(){
-        let checkedBranches = document.getElementsByClassName("checkedBranches") 
-        for (let checkedBranch of checkedBranches){            
-            if(!checkedBranch.checked){
-                routesDisplays[checkedBranch.value].setMap(null);
-            } else {
-                routesDisplays[checkedBranch.value].setMap(map);
-            }
-        }
+        return "hsl(" + (id * 205) % 360 + ",100%,50%)";
     }
 
     function updateBranchsList(){
         axios.get("/routes")
             .then((resp)=>{
-                console.log("updateBranchList")
-                console.log(resp.data)
                 data.branches = resp.data
                 setGoogleMapsDisplays()
             })
@@ -104,7 +92,6 @@ function homeApp(){
         el: "#homeApp",
         data: data,
         methods : {
-            updateMap : updateMap,
             updateBranchsList : updateBranchsList
         }
     })

@@ -51,14 +51,12 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="AddStop_Modal">
-                    <label for="numer_stop">#:</label>
-                    <input type="text" class="form-control" id="number_stop" v-model="newStop.number">
+                    <label for="numer_stop" >#:</label>
+                    <input type="text" class="form-control" id="number_stop" v-model="newStop.number" >
                     <label for="name_branch">Name:</label>
-                    <input type="text" class="form-control" id="name_stop" v-model="newStop.name">
-                    <label for="latitude_stop">Latitude:</label>
-                    <input type="text" class="form-control" id="latitude_stop" v-model="newStop.latitude">    
-                    <label for="longitude_stop">Longitude:</label>
-                    <input type="text" class="form-control" id="longitude_stop" v-model="newStop.longitude">
+                    <input type="text" class="form-control" id="name_stop" v-model="newStop.name" >
+                    <label for="address_stop">Address:</label>
+                    <input type="text" class="form-control" id="address_stop" v-model="newStop.address">    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary"  v-on:click="createStop(newStop);">Add</button>
@@ -82,10 +80,8 @@
                     <input type="text" class="form-control" id="numer_editStop" v-model="editStop.number">
                     <label for="name_editStop">Name:</label>
                     <input type="text" class="form-control" id="name_editStop" v-model="editStop.name">
-                    <label for="latitude_editStop">Latitude:</label>
-                    <input type="text" class="form-control" id="latitude_editStop" v-model="editStop.latitude">    
-                    <label for="longitude_editStop">Longitude:</label>
-                    <input type="text" class="form-control" id="longitude_editStop" v-model="editStop.longitude"> 
+                    <label for="address_editStop">Address:</label>
+                    <input type="text" class="form-control" id="address_editStop" v-model="editStop.address">    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="saveButton_editModal" v-on:click="updateStop(editStop.id, editStop);">Update</button>
