@@ -35,7 +35,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('AV del Libertador 3901 (AV del Libertador y AV Dorrego)', 20, '-34.57056812957072', '-58.42445097315613', 1),
 ('AV del Libertador 4101 (AV del Libertador - Campo de Polo)', 21, '-34.569494029279994', '-58.42625985596425', 1),
 ('AV del Libertador 4400 (AV del Libertador y Ortega y Gasset)', 22, '-34.567305606157674', '-58.430103851792865', 1),
-('AV del Libertador 4602 (AV del Libertador y Tte. Benjamín Matienzo)', 23, '-34.56608914546435', '-58.43238185869086', 1)
+('AV del Libertador 4602 (AV del Libertador y Tte. Benjamín Matienzo)', 23, '-34.56608914546435', '-58.43238185869086', 1);
 --Hasta acá son 23. 
 ('AV del Libertador 4802 (AV del Libertador y Maure)', 24, '-34.56488348417872', '-58.43441753749613', 1),
 ('AV del Libertador 5000 (AV del Libertador y Olleros)', 25, '-34.563716923330134', '-58.436394380308116', 1),
@@ -45,7 +45,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('José Hernandez 1802 (José Hernandez y 11 de Septiembre)', 29, '-34.56253792673666', '-58.447918853943065', 1),
 ('3 de Febrero 1802 (3 de Febrero y La Pampa)', 30, '-34.56213592067825', '-58.4497467800943', 1),
 ('3 de Febrero 2002 (3 de Febrero y Echeverría)', 31, '-34.56025750897938', '-58.42173085576138', 1),
-('11 de Septiembre 1888 (11 de Septiembre y Mariscal Antonio José de Sucre)', 32, '-34.56049230519902', '-58.44964335936584', 1)
+('11 de Septiembre 1888 (11 de Septiembre y Mariscal Antonio José de Sucre)', 32, '-34.56049230519902', '-58.44964335936584', 1);
 
 --Branch Nº 2 - Parque Centenario
 INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
@@ -66,7 +66,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('Sarmiento 4199 (Sarmiento y Gascón)', 15, '-34.60449583', '-58.42424843', 2),
 ('Sarmiento 4401 (Sarmiento y Pringles)', 16, '-34.60415585', '-58.42754219', 2),
 ('Antonio Machado 1 (Antonio Machado y Río de Janeiro)', 17, '-34.60395945', '-58.43242883', 2),
-('Antonio Machado 199 (Antonio Machado y AV Patricias Argentinas)', 18, '-34.60465267', '-58.43415278', 2)
+('Antonio Machado 199 (Antonio Machado y AV Patricias Argentinas)', 18, '-34.60465267', '-58.43415278', 2);
 
 --Branch Nº 3 - Plaza Miserere
 INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
@@ -78,7 +78,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('Vicente López 2050 (Vicente López y Pte. José Evaristo Uriburu)', 6, '-34.58871712', '-58.39401947', 3),
 ('AV Pueyrredón 2299 (AV Pueyrredón y Vicente López)', 7, '-34.58697553', '-58.39619129', 3),
 ('AV Pueyrredón 2054 (AV Pueyrredón y José Andrés Pacheco de Melo)', 8, '-34.58831367', '-58.39864552', 3),
-('AV Pueyrredón 1802 (AV Pueyrredón y French)', 9, '-34.59006691', '-58.40030044', ),
+('AV Pueyrredón 1802 (AV Pueyrredón y French)', 9, '-34.59006691', '-58.40030044', 3),
 ('AV Pueyrredón 1599 (AV Pueyrredón y Beruti)', 10, '-34.59274559', '-58.40153425', 3),
 ('AV Pueyrredón 1401 (AV Pueyrredón y AV Santa Fe)', 11, '-34.59429539', '-58.40225547', 3),
 ('AV Pueyrredón 1201 (AV Pueyrredón y Gral. Lucio Norberto Mansilla)', 12, '-34.59647949', '-58.40307658', 3),
@@ -87,7 +87,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('AV Pueyrredón 600 (AV Pueyrredón y Lavalle)', 15, '-34.60325703', '-58.40509441', 3),
 ('AV Pueyrredón 401 (AV Pueyrredón y Valentín Gómez)', 16, '-34.60550608', '-58.40567084', 3),
 ('AV Pueyrredón 201 (AV Pueyrredón y Pte. Tte. Gral. Juan Domingo Perón)', 17, '-34.60765519', '-58.40608671', 3),
-('AV Rivadavia 2802 (AV Rivadavia y AV Pueyrredón)', 18, '-34.61010752', '-58.40605082', 3)
+('AV Rivadavia 2802 (AV Rivadavia y AV Pueyrredón)', 18, '-34.61010752', '-58.40605082', 3);
 
 --Branch Nº 4 - Parque Rivadavia
 INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
@@ -108,7 +108,7 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('AV Corrientes 3301 (AV Corrientes y Agüero)', 15, '-34.60407018836955', '-58.41188606627941', 4),
 ('AV Corrientes 3115 (AV Corrientes y Jean Jaures)', 16, '-34.60409781640737', '-58.40933007214272', 4),
 ('AV Corrientes 2902 (AV Corrientes y Boulogne Sur Mer)', 17, '-34.60471487533306', '-58.4068280576073', 4),
-('AV Pueyrredón 401 (AV Pueyrredón y Valentín Gomez )', 18, '-34.605485739417894', '-58.40563890637037', 4)
+('AV Pueyrredón 401 (AV Pueyrredón y Valentín Gomez )', 18, '-34.605485739417894', '-58.40563890637037', 4);
 
 --Branch Nº 5 - Plaza Serrano
 INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
@@ -126,4 +126,4 @@ INSERT INTO stops (name, number, latitude, longitude, branch_id) VALUES
 ('Honduras 4301 (Honduras y Lavalleja)', 12, '-34.59337805204354', '-58.423625261643565', 5),
 ('Honduras 4501 (Honduras y Aráoz)', 13, '-34.592034053650664', '-58.4252344609821', 5),
 ('Honduras 4701 (Honduras y Malabia)', 14, '-34.59068714106355', '-58.42710127845646', 5),
-('Honduras 4900 (Honduras y Gurruchaga)', 15, '-34.58940382345916', '-58.42911291025632', 5)
+('Honduras 4900 (Honduras y Gurruchaga)', 15, '-34.58940382345916', '-58.42911291025632', 5);

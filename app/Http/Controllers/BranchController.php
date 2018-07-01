@@ -9,7 +9,7 @@ use App\Branch;
 class BranchController extends Controller
 {
     function getAll(){
-        return Branch::all();
+        return Branch::with('stops')->get();
     }
 
     function byId($id){
