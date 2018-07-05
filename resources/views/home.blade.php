@@ -15,7 +15,7 @@
                 <span v-for="branch of branches">
                     <label>
                         @{{ branch.name }}
-                        <div :data-id="branch.id" class="color-box"></div>
+                        <div v-bind:id="branch.id" class="color-box"></div>
                     </label>
                 </span>
             </div>

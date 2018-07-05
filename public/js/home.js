@@ -43,9 +43,10 @@ function homeApp(){
                     };
                     
                     let color = colorById(branch.id)
-                    branch.color = color;
+                    var ele = document.getElementsByClassName('color-box');
+                    ele[branch.id -1].style.backgroundColor = colorById(branch.id);
 
-                   /* document.getElementById(branch.id).style.background = color;
+                    /*document.getElementsByClassName(color-box).style.background = color;
                     console.log(branch);*/
 
                     directionsService.route(request, function(result, status) {
@@ -70,7 +71,6 @@ function homeApp(){
         }
     }
 
-    //Google Maps Api End //
     function colorById(id){
         return "hsl(" + (id * 205) % 360 + ",100%,50%)";
     }
