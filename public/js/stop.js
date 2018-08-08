@@ -16,7 +16,7 @@ function stopApp() {
     let directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer({ 
         polylineOptions: {strokeColor:"#4a4a4a",strokeWeight:5}, 
-        suppressMarkers:true });
+        suppressMarkers: false });
 
     setTimeout(()=>{
         let bsas = {lat: -34.6037, lng: -58.3816};
@@ -37,24 +37,23 @@ function stopApp() {
     function placeMarker(location) {
         var marker = new google.maps.Marker({
             position: location, 
-            map: map,
-            suppressMarkers: true
+            map: map
         });
     }
 
     function updateMarkers (stops){
-
         const points = stops.map( s => ({lat:s.latitude,lng:s.longitude, number: s.number, name: s.name, branch_id: s.branch_id, id : s.id}))
 
         points.forEach( p => {
             const marker = new google.maps.Marker({
                 position: p,
                 map: map,
-                draggable: false,
+                draggable: true,
                 label: "" + p.number
             })
+
             marker.addListener("dragend",()=> {
-                axios.put("api/stop/" + p.id, {latitude:marker.position.lat() , longitude: marker.position.lng(), number: p.number, name: p.name, branch_id: p.branch_id, })
+                axios.put(`api/stop/${p.id}`,{latitude:marker.position.lat(), longitude: marker.position.lng(), name: p.name, number: p.number, branch_id: p.branch_id})
                     .then( r => updatePage() )
                     .catch(error => console.error(error.response ? error.response.data : error))
             })
@@ -86,15 +85,13 @@ function stopApp() {
     }
 
     function refresh(){
-        $("#name_stop").value = null;
-        $("#schedule_stop").value = null;
-        $("#name_editstop").value = null;
-        $("#schedule_editstop").value = null;
-        data.newBranch = {}; 
+        $("#editStop_form").hide();
+        $("#newStop_form").show();
+
+        data.newStop = {}; 
     }
 
     function updatePage(){
-        console.log("update page");
         axios.get("api/branch/" + branchId)
         .then(resp => { 
             data.branch = resp.data
@@ -124,6 +121,9 @@ function stopApp() {
     }
 
     function loadEditForm(stop_id){
+        $("#editStop_form").show();
+        $("#newStop_form").hide();
+        
         axios.get("api/stop/" + stop_id)
             .then((resp)=>{
                 data.editStop = resp.data;
@@ -147,7 +147,6 @@ function stopApp() {
             axios.put("api/stop/" + id, this.editStop)
             .then((resp)=>{
                 updatePage();
-                $("#EditStop").click();
                 data.editStop = {}
             })                        
             .catch((err)=>{
@@ -199,5 +198,8 @@ function stopApp() {
     })
 }
 window.addEventListener("load",function(){
+    $("#editStop_form").hide();
+    $("#newStop_form").show();
+
     stopApp();
 }) 
